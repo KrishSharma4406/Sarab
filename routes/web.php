@@ -11,6 +11,8 @@ use App\Models\Banner;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Models\Menu;
+use App\Http\Controllers\Admin\ContactController;
+use App\Models\Contacts;
 
 Route::get('/', function () {
 
@@ -22,10 +24,13 @@ Route::get('/', function () {
                 ->orderBy('position')
                 ->get();
 
+    $contacts = Contacts::first();
+
     return view('frontend.index', compact(
         'products',
         'banner',
-        'menus'
+        'menus',
+        'contacts'
     ));
 });
 
@@ -39,6 +44,11 @@ Route::get('/products/edit/{id}',[ProductsController::class, 'edit'])->name('pro
 Route::put('/products/update/{id}',[ProductsController::class, 'update'])->name('products.update');
 Route::delete('/products/destroy/{id}',[ProductsController::class, 'destroy'])->name('products.destroy');
 Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
+Route::get('/contacts/edit/{id}', [ContactController::class, 'edit'])->name('contacts.edit'); 
+Route::delete('contacts/delete/{id}',[ContactController::class, 'destroy'])->name('contacts.delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -67,6 +77,10 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('products', ProductController::class);
 
+    Route::resource('contacts', ContactController::class);
+
+
+
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -78,10 +92,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('menu', MenuController::class);
     Route::resource('banners', BannerController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('contacts', ContactController::class);
 });
 
-Route::resource('menu', MenuController::class);
-
-Route::resource('banners', BannerController::class);
 
 require __DIR__.'/auth.php';

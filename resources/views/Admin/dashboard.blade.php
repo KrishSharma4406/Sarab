@@ -22,6 +22,12 @@
                 Manage Menus
             </a>
         </div>
+
+        <div class="col-md-4">
+            <a href="{{ route('contact.index') }}" class="btn btn-warning">
+                Manage Contact Information
+            </a>
+        </div>
     </div>
 </div>
 @endsection

@@ -29,9 +29,9 @@
          <div class="container">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                <div class="top-contact d-flex flex-wrap">
-                  <span><i class="fas fa-phone-alt"></i>+1 (800) 123-4567</span>
-                  <span><i class="fas fa-envelope"></i>hello@sarabfood.com</span>
-                  <span><i class="fas fa-map-marker-alt"></i>42 Flavor Street, NY</span>
+                  <span><i class="fas fa-phone-alt"></i>{{ $contact->phone ?? '' }}</span>
+                  <span><i class="fas fa-envelope"></i>{{ $contact->email ?? '' }}</span>
+                  <span><i class="fas fa-map-marker-alt"></i>{{ $contact->address ?? '' }}</span>
                </div>
                <div class="d-flex align-items-center gap-3">
                   <span class="ttag"><i class="fas fa-fire me-1"></i>Free Delivery Today!</span>
@@ -857,9 +857,15 @@
                <div class="col-lg-4" data-aos="fade-left">
                   <div class="hrscard">
                      <h5 style="color:#fff;margin-bottom:18px;font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:700;"><i class="fas fa-map-marker-alt me-2" style="color:var(--secondary);"></i>Find Us</h5>
-                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-location-dot me-2" style="color:var(--secondary);"></i>Address</span><span class="hrstime" style="font-size:.8rem;">42 Flavor Street, NY</span></div>
-                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-phone me-2" style="color:var(--secondary);"></i>Phone</span><span class="hrstime" style="font-size:.8rem;">+1 (800) 123-4567</span></div>
-                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-envelope me-2" style="color:var(--secondary);"></i>Email</span><span class="hrstime" style="font-size:.8rem;">hello@sarabfood.com</span></div>
+                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-location-dot me-2" style="color:var(--secondary);"></i>Address</span><span class="hrstime" style="font-size:.8rem;">
+                        {{ $contact->address ?? '' }}
+                     </span></div>
+                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-phone me-2" style="color:var(--secondary);"></i>Phone</span><span class="hrstime" style="font-size:.8rem;">
+                        {{ $contact->phone ?? '' }}
+                     </span></div>
+                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-envelope me-2" style="color:var(--secondary);"></i>Email</span><span class="hrstime" style="font-size:.8rem;">
+                        {{ $contact->email ?? '' }}
+                     </span></div>
                   </div>
                </div>
             </div>
@@ -956,19 +962,27 @@
                      <div class="d-flex flex-column gap-3">
                         <div class="d-flex align-items-center gap-3">
                            <div style="width:46px;height:46px;border-radius:11px;background:rgba(232,40,26,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;flex-shrink:0;"><i class="fas fa-clock"></i></div>
-                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Opening Hours</strong><span style="color:#fff;font-size:.87rem;">Wed - Sun, 9 AM - 11 PM</span></div>
+                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Opening Hours</strong><span style="color:#fff;font-size:.87rem;">
+                              {{ $contacts->opening_hours ?? '' }}
+                           </span></div>
                         </div>
                         <div class="d-flex align-items-center gap-3">
                            <div style="width:46px;height:46px;border-radius:11px;background:rgba(232,40,26,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;flex-shrink:0;"><i class="fas fa-phone-alt"></i></div>
-                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Call for Booking</strong><span style="color:#fff;font-size:.87rem;">+1 (800) 123-4567</span></div>
+                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Call for Booking</strong><span style="color:#fff;font-size:.87rem;">
+                              {{ $contacts->phone ?? '' }}
+                           </span></div>
                         </div>
                         <div class="d-flex align-items-center gap-3">
                            <div style="width:46px;height:46px;border-radius:11px;background:rgba(232,40,26,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;flex-shrink:0;"><i class="fas fa-users"></i></div>
-                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Group Dining</strong><span style="color:#fff;font-size:.87rem;">Special menus for 10+ guests</span></div>
+                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Group Dining</strong><span style="color:#fff;font-size:.87rem;">
+                              {{ $contacts->group_dining ?? '' }}
+                           </span></div>
                         </div>
                         <div class="d-flex align-items-center gap-3">
                            <div style="width:46px;height:46px;border-radius:11px;background:rgba(232,40,26,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;flex-shrink:0;"><i class="fas fa-map-marker-alt"></i></div>
-                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Location</strong><span style="color:#fff;font-size:.87rem;">42 Flavor Street, NY</span></div>
+                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Location</strong><span style="color:#fff;font-size:.87rem;">
+                              {{ $contacts->address ?? '' }}
+                           </span></div>
                         </div>
                      </div>
                   </div>
@@ -1110,25 +1124,35 @@
                      <p class="ctsub">We typically respond within 2 hours during business hours.</p>
                      <div class="ctitem">
                         <div class="cticon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="ctinfo"><strong>Address</strong><span>42 Flavor Street, Manhattan,<br/>New York, NY 10001</span></div>
+                        <div class="ctinfo"><strong>Address</strong><span>{{ $contacts->address ?? '' }}</span></div>
                      </div>
                      <div class="ctitem">
                         <div class="cticon"><i class="fas fa-phone-alt"></i></div>
-                        <div class="ctinfo"><strong>Phone</strong><span>+1 (800) 123-4567</span></div>
+                        <div class="ctinfo"><strong>Phone</strong><span>{{ $contacts->phone ?? '' }}</span></div>
                      </div>
                      <div class="ctitem">
                         <div class="cticon"><i class="fas fa-envelope"></i></div>
-                        <div class="ctinfo"><strong>Email</strong><span>hello@sarabfood.com</span></div>
+                        <div class="ctinfo"><strong>Email</strong><span>{{ $contacts->email ?? '' }}</span></div>
                      </div>
                      <div class="ctitem">
                         <div class="cticon"><i class="fas fa-clock"></i></div>
-                        <div class="ctinfo"><strong>Working Hours</strong><span>Wed - Sun: 9 AM - 11 PM</span></div>
+                        <div class="ctinfo"><strong>Working Hours</strong><span>{{ $contacts->opening_hours ?? '' }}</span></div>
                      </div>
                      <div class="ctsocrow">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="{{ $contacts->facebook ?? '#' }}">
+                           <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <a href="{{ $contacts->instagram ?? '#' }}">
+                           <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a href="{{ $contacts->twitter ?? '#' }}">
+                           <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="{{ $contacts->youtube ?? '#' }}">
+                            <i class="fab fa-youtube"></i>
+                        </a>
                      </div>
                   </div>
                </div>
@@ -1169,11 +1193,11 @@
                   <div class="fnm">Sar<span>ab</span></div>
                   <p class="fdesc">We bring the world's finest flavors together in a fast, friendly, and affordable experience. Every meal crafted with love.</p>
                   <div class="fsoc">
-                     <a href="#"><i class="fab fa-facebook-f"></i></a>
-                     <a href="#"><i class="fab fa-instagram"></i></a>
-                     <a href="#"><i class="fab fa-twitter"></i></a>
-                     <a href="#"><i class="fab fa-youtube"></i></a>
-                     <a href="#"><i class="fab fa-tiktok"></i></a>
+                     <a href="{{ $contacts->facebook ?? '#' }}"><i class="fab fa-facebook-f"></i></a>
+                     <a href="{{ $contacts->instagram ?? '#' }}"><i class="fab fa-instagram"></i></a>
+                     <a href="{{ $contacts->twitter ?? '#' }}"><i class="fab fa-twitter"></i></a>
+                     <a href="{{ $contacts->youtube ?? '#' }}"><i class="fab fa-youtube"></i></a>
+                     <a href="{{ $contacts->tiktok ?? '#' }}"><i class="fab fa-tiktok"></i></a>
                   </div>
                </div>
                <div class="col-sm-6 col-lg-2">
@@ -1202,19 +1226,19 @@
                   <div class="ftit">Get In Touch</div>
                   <div class="fci">
                      <div class="fciico"><i class="fas fa-map-marker-alt"></i></div>
-                     <div class="fciinfo"><strong>Address</strong>42 Flavor Street, Manhattan, NY 10001</div>
+                     <div class="fciinfo"><strong>Address</strong>{{ $contacts->address ?? '42 Flavor Street, Manhattan, NY 10001' }}</div>
                   </div>
                   <div class="fci">
                      <div class="fciico"><i class="fas fa-phone-alt"></i></div>
-                     <div class="fciinfo"><strong>Phone</strong>+1 (800) 123-4567</div>
+                     <div class="fciinfo"><strong>Phone</strong>{{ $contacts->phone ?? '+1 (800) 123-4567' }}</div>
                   </div>
                   <div class="fci">
                      <div class="fciico"><i class="fas fa-envelope"></i></div>
-                     <div class="fciinfo"><strong>Email</strong>hello@sarabfood.com</div>
+                     <div class="fciinfo"><strong>Email</strong>{{ $contacts->email ?? 'hello@sarabfood.com' }}</div>
                   </div>
                   <div class="fci">
                      <div class="fciico"><i class="fas fa-clock"></i></div>
-                     <div class="fciinfo"><strong>Hours</strong>Wed - Sun: 09 AM - 11 PM</div>
+                     <div class="fciinfo"><strong>Hours</strong>{{ $contacts->opening_hours ?? 'Wed - Sun: 09 AM - 11 PM' }}</div>
                   </div>
                </div>
             </div>
