@@ -15,7 +15,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('contact.store') }}"
+            <form action="{{ route('contacts.store') }}"
                   method="POST">
 
                 @csrf
@@ -115,6 +115,22 @@
                         <input type="text"
                                name="linkedin"
                                class="form-control">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>YouTube URL</label>
+
+                        <input type="text"
+                               name="youtube"
+                               class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Group Dining</label>
+                        <input type="text"
+                            name="group_dining"
+                            class="form-control"
+                            placeholder="Special menus for 10+ guests">
                     </div>
 
                 </div>

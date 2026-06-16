@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();
+            $table->string('group_dining')->nullable();
 
             $table->string('opening_hours')->nullable();
 

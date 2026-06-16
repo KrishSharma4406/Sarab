@@ -22,10 +22,23 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
-        Contacts::create($request->all());
+        Contacts::create([
+    'company_name' => $request->company_name,
+    'phone' => $request->phone,
+    'email' => $request->email,
+    'opening_hours' => $request->opening_hours,
+    'address' => $request->address,
+    'google_map' => $request->google_map,
+    'facebook' => $request->facebook,
+    'instagram' => $request->instagram,
+    'twitter' => $request->twitter,
+    'linkedin' => $request->linkedin,
+    'youtube' => $request->youtube,
+    'group_dining' => $request->group_dining
+]);
 
         return redirect()
-            ->route('contact.index')
+            ->route('contacts.index')
             ->with('success','Contact Added Successfully');
     }
 
@@ -38,12 +51,25 @@ class ContactController extends Controller
 
     public function update(Request $request,$id)
     {
-        $contact = Contacts::findOrFail($id);
+        $contacts = Contacts::findOrFail($id);
 
-        $contact->update($request->all());
+        $contacts->update([
+            'company_name' => $request->company_name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'opening_hours' => $request->opening_hours,
+            'address' => $request->address,
+            'google_map' => $request->google_map,
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+            'youtube' => $request->youtube,
+            'group_dining' => $request->group_dining
+        ]);
 
         return redirect()
-            ->route('contact.index')
+            ->route('contacts.index')
             ->with('success','Contact Updated Successfully');
     }
 
