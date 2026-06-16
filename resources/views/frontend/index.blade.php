@@ -1109,7 +1109,22 @@
       <!-- ============================================================
          FIX 6 � CONTACT FORM
          ============================================================ -->
-      <section id="contact-section">
+
+         @php
+$showContactCard = $contacts && (
+    !empty($contacts->address) ||
+    !empty($contacts->phone) ||
+    !empty($contacts->email) ||
+    !empty($contacts->opening_hours) ||
+    !empty($contacts->facebook) ||
+    !empty($contacts->instagram) ||
+    !empty($contacts->twitter) ||
+    !empty($contacts->linkedin) ||
+    !empty($contacts->youtube)
+);
+@endphp
+
+      <section id="contact-section" class="py-5">
          <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
                <span class="slbl">Get In Touch</span>
@@ -1118,45 +1133,99 @@
                <p class="sdesc mx-auto" style="max-width:480px;">Have a question, feedback, or want to plan a special event? We'd love to hear from you.</p>
             </div>
             <div class="row g-4">
-               <div class="col-lg-4" data-aos="fade-right">
-                  <div class="ctdark">
-                     <h4>Let's Talk</h4>
-                     <p class="ctsub">We typically respond within 2 hours during business hours.</p>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="ctinfo"><strong>Address</strong><span>{{ $contacts->address ?? '' }}</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-phone-alt"></i></div>
-                        <div class="ctinfo"><strong>Phone</strong><span>{{ $contacts->phone ?? '' }}</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-envelope"></i></div>
-                        <div class="ctinfo"><strong>Email</strong><span>{{ $contacts->email ?? '' }}</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-clock"></i></div>
-                        <div class="ctinfo"><strong>Working Hours</strong><span>{{ $contacts->opening_hours ?? '' }}</span></div>
-                     </div>
-                     <div class="ctsocrow">
-                        <a href="{{ $contacts->facebook ?? '#' }}">
-                           <i class="fab fa-facebook-f"></i>
-                        </a>
 
-                        <a href="{{ $contacts->instagram ?? '#' }}">
-                           <i class="fab fa-instagram"></i>
-                        </a>
+@if($showContactCard)
 
-                        <a href="{{ $contacts->twitter ?? '#' }}">
-                           <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="{{ $contacts->youtube ?? '#' }}">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-8" data-aos="fade-left">
+<div class="col-lg-4" data-aos="fade-right">
+    <div class="ctdark">
+        <h4>Let's Talk</h4>
+
+        @if($contacts->address)
+        <div class="ctitem">
+            <div class="cticon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="ctinfo">
+                <strong>Address</strong>
+                <span>{{ $contacts->address }}</span>
+            </div>
+        </div>
+        @endif
+
+        @if($contacts->phone)
+        <div class="ctitem">
+            <div class="cticon">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="ctinfo">
+                <strong>Phone</strong>
+                <span>{{ $contacts->phone }}</span>
+            </div>
+        </div>
+        @endif
+
+        @if($contacts->email)
+        <div class="ctitem">
+            <div class="cticon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="ctinfo">
+                <strong>Email</strong>
+                <span>{{ $contacts->email }}</span>
+            </div>
+        </div>
+        @endif
+
+        @if($contacts->opening_hours)
+        <div class="ctitem">
+            <div class="cticon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="ctinfo">
+                <strong>Working Hours</strong>
+                <span>{{ $contacts->opening_hours }}</span>
+            </div>
+        </div>
+        @endif
+
+        <div class="ctsocrow">
+            @if($contacts->facebook)
+                <a href="{{ $contacts->facebook }}">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            @endif
+
+            @if($contacts->instagram)
+                <a href="{{ $contacts->instagram }}">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            @endif
+
+            @if($contacts->twitter)
+                <a href="{{ $contacts->twitter }}">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            @endif
+
+            @if($contacts->youtube)
+                <a href="{{ $contacts->youtube }}">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            @endif
+        </div>
+
+    </div>
+</div>
+
+<div class="col-lg-8" data-aos="fade-left">
+
+@else
+
+<div class="col-lg-12" data-aos="fade-left">
+
+@endif
+               
+               <div class="{{ $showContactCard ? 'col-lg-8' : 'col-lg-12' }}" data-aos="fade-left">
                   <div class="fcard">
                      <div class="row g-3">
                         <div class="col-sm-6"><label class="flbl">Your Name *</label><input type="text" class="fctrl" placeholder="John Doe"/></div>

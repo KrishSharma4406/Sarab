@@ -500,6 +500,14 @@ section {
   display: block;
   line-height: 1;
 }
+#contact-section {
+    padding-bottom: 120px;
+}
+
+#contact-section .fcard {
+    position: relative;
+    z-index: 2;
+}
 .fcsm {
   font-size: 0.66rem;
   color: #999;
