@@ -7,8 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
-
 # Sarab
 
 Sarab is a dynamic restaurant management platform built with Laravel. It transforms a static restaurant website into a fully customizable application where administrators can manage all website content and users can manage their profiles, preferences, and reservations.
