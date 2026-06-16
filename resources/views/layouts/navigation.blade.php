@@ -25,6 +25,9 @@
                     <x-nav-link :href="route('menu.index')" :active="request()->routeIs('menu.index')">
                         {{ __('Manage Menu') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contact.index')">
+                        {{ __('Manage Contact Information') }}
+                    </x-nav-link>
                 </div>
             </div>
 
