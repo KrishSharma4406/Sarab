@@ -16,6 +16,8 @@ use App\Models\Contacts;
 use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Models\Category;
+use App\Http\Controllers\Admin\MarqueeController;
+use App\Models\Marquee;
 
 Route::get('/', function () {
 
@@ -34,12 +36,15 @@ Route::get('/', function () {
                     ->orderBy('name')
                     ->get();
 
+    $marquees = Marquee::where('status',1)->get();
+
     return view('frontend.index', compact(
         'products',
         'banner',
         'menus',
         'contacts',
         'categories',
+        'marquees'
     ));
 });
 
@@ -97,6 +102,8 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('categories', CategoryController::class);
 
+    Route::resource('marquees', MarqueeController::class);
+
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -111,6 +118,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('contacts', ContactController::class);
     Route::resource('hero-section', HeroSectionController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('marquees', MarqueeController::class);
 });
 
 
