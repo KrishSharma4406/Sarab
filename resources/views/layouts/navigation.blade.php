@@ -37,6 +37,9 @@
                     <x-nav-link :href="route('marquees.index')" :active="request()->routeIs('marquees.index')">
                         {{ __('Manage Marquees') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('about.index')" :active="request()->routeIs('about.index')">
+                        {{ __('Manage About Section') }}
+                    </x-nav-link>
                 </div>
             </div>
 

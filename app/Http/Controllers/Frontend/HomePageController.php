@@ -10,6 +10,7 @@ use App\Models\Contacts;
 use App\Models\HeroSection;
 use App\Models\Category;
 use App\Models\Marquee;
+use App\Models\AboutSection;
 
 class HomePageController extends Controller
 {
@@ -34,6 +35,8 @@ class HomePageController extends Controller
 
     $marquees = Marquee::where('status',1)->get();
 
+    $about = AboutSection::first();
+
     return view('frontend.index', compact(
         'hero',
         'products',
@@ -41,7 +44,8 @@ class HomePageController extends Controller
         'categories',
         'menus',
         'contacts',
-        'marquees'
+        'marquees',
+        'about'
     ));
 }
 }
