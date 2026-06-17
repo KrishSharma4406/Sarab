@@ -13,6 +13,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Models\Menu;
 use App\Http\Controllers\Admin\ContactController;
 use App\Models\Contacts;
+use App\Http\Controllers\Admin\HeroSectionController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Models\Category;
 
 Route::get('/', function () {
 
@@ -26,11 +29,17 @@ Route::get('/', function () {
 
     $contacts = Contacts::first();
 
+    $categories = Category::withCount('products')
+                    ->where('is_active', 1)
+                    ->orderBy('name')
+                    ->get();
+
     return view('frontend.index', compact(
         'products',
         'banner',
         'menus',
-        'contacts'
+        'contacts',
+        'categories',
     ));
 });
 
@@ -49,6 +58,11 @@ Route::get('/contacts/create', [ContactController::class, 'create'])->name('cont
 Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
 Route::get('/contacts/edit/{id}', [ContactController::class, 'edit'])->name('contacts.edit'); 
 Route::delete('contacts/delete/{id}',[ContactController::class, 'destroy'])->name('contacts.delete');
+Route::get('/hero-section', [HeroSectionController::class, 'index'])->name('hero-section.index');
+Route::get('/hero-section/create', [HeroSectionController::class, 'create'])->name('hero-section.create');
+Route::get('/hero-section/edit', [HeroSectionController::class, 'edit'])->name('hero-section.edit');
+Route::post('/hero-section', [HeroSectionController::class, 'store'])->name('hero-section.store');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -79,7 +93,9 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('contacts', ContactController::class);
 
+    Route::resource('hero-section', HeroSectionController::class);
 
+    Route::resource('categories', CategoryController::class);
 
 });
 
@@ -93,6 +109,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('banners', BannerController::class);
     Route::resource('products', ProductController::class);
     Route::resource('contacts', ContactController::class);
+    Route::resource('hero-section', HeroSectionController::class);
+    Route::resource('categories', CategoryController::class);
 });
 
 

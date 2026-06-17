@@ -7,26 +7,37 @@ use App\Models\Products;
 use App\Models\Banner;
 use App\Models\Menu;
 use App\Models\Contacts;
+use App\Models\HeroSection;
+use App\Models\Category;
 
 class HomePageController extends Controller
 {
     public function index()
-    {
-        $products = Products::all();
+{
+    $hero = HeroSection::first();
 
-        $banner = Banner::first();
+    $products = Products::all();
 
-        $menus = Menu::where('status',1)
-                    ->orderBy('position')
+    $banner = Banner::first();
+
+    $categories = Category::withCount('products')
+                    ->where('is_active', 1)
+                    ->orderBy('name')
                     ->get();
 
-        $contact = Contacts::first();
+    $menus = Menu::where('status',1)
+                ->orderBy('position')
+                ->get();
 
-        return view('frontend.index', compact(
-            'products',
-            'banner',
-            'menus',
-            'contact'
-        ));
-    }
+    $contacts = Contacts::first();
+
+    return view('frontend.index', compact(
+        'hero',
+        'products',
+        'banner',
+        'categories',
+        'menus',
+        'contacts'
+    ));
+}
 }
