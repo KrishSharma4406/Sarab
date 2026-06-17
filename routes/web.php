@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\AboutSectionController;
 use App\Models\AboutSection;
 use App\Http\Controllers\Admin\OfferSectionController;
 use App\Models\OfferSection;
+use App\Http\Controllers\Admin\FoodShowcaseController;
+use App\Models\FoodShowcase;
 
 Route::get('/', function () {
 
@@ -46,6 +48,8 @@ Route::get('/', function () {
 
     $offer = OfferSection::where('status', 1)->first();
 
+    $foodShowcase = FoodShowcase::first();
+
     return view('frontend.index', compact(
         'products',
         'banner',
@@ -54,7 +58,8 @@ Route::get('/', function () {
         'categories',
         'marquees',
         'about',
-        'offer'
+        'offer',
+        'foodShowcase'
     ));
 });
 
@@ -77,6 +82,8 @@ Route::get('/hero-section', [HeroSectionController::class, 'index'])->name('hero
 Route::get('/hero-section/create', [HeroSectionController::class, 'create'])->name('hero-section.create');
 Route::get('/hero-section/edit', [HeroSectionController::class, 'edit'])->name('hero-section.edit');
 Route::post('/hero-section', [HeroSectionController::class, 'store'])->name('hero-section.store');
+Route::get('/admin/food-showcase', [FoodShowcaseController::class, 'edit']);
+Route::post('/admin/food-showcase', [FoodShowcaseController::class, 'update'])->name('food-showcase.update');
 
 
 Route::get('/dashboard', function () {
@@ -117,6 +124,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('admin/about', AboutSectionController::class);
 
     Route::resource('offer', OfferSectionController::class);
+
+    Route::resource('foods_showcase', FoodShowcaseController::class);
 
 });
 
