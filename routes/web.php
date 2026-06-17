@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Models\Category;
 use App\Http\Controllers\Admin\MarqueeController;
 use App\Models\Marquee;
+use App\Http\Controllers\Admin\AboutSectionController;
+use App\Models\AboutSection;
 
 Route::get('/', function () {
 
@@ -38,13 +40,16 @@ Route::get('/', function () {
 
     $marquees = Marquee::where('status',1)->get();
 
+    $about = AboutSection::first();
+
     return view('frontend.index', compact(
         'products',
         'banner',
         'menus',
         'contacts',
         'categories',
-        'marquees'
+        'marquees',
+        'about'
     ));
 });
 
@@ -103,6 +108,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('marquees', MarqueeController::class);
+
+    Route::resource('admin/about', AboutSectionController::class);
 
 });
 
