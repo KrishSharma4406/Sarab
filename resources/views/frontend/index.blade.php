@@ -775,87 +775,170 @@
          </div>
       </div>
       <!-- SPECIAL OFFER -->
-      <section id="special">
-         <div class="spbg"></div>
-         <div class="container" style="position:relative;z-index:2;">
-            <div class="row align-items-center g-5">
-               <div class="col-lg-6" data-aos="fade-right">
-                  <div class="sptag"><i class="fas fa-bolt me-1"></i>Limited Time Offer</div>
-                  <h2 class="sptitle">Get 30% Off<br/>Our Signature<br/><span>Burger</span> Meal</h2>
-                  <p class="spdesc">Don't miss our weekend special - grab our award-winning signature burger combo with loaded fries and a premium shake at an unbeatable price.</p>
-                  <div class="cdwrap">
-                     <div class="cditem"><span class="cdnum" id="cdH">08</span><span class="cdlbl">Hours</span></div>
-                     <div class="cditem"><span class="cdnum" id="cdM">45</span><span class="cdlbl">Minutes</span></div>
-                     <div class="cditem"><span class="cdnum" id="cdS">30</span><span class="cdlbl">Seconds</span></div>
-                  </div>
-                  <a href="#menu" class="btn-red"><i class="fas fa-shopping-cart"></i>Grab the Deal</a>
-               </div>
-               <div class="col-lg-6" data-aos="fade-left">
-                  <div class="spimgw">
-                     <div class="spglow"></div>
-                     <div class="sppbdg"><span class="old">$24.99</span><span class="np">$17.49</span></div>
-                     <img src="{{ asset('UI/img/off-img.jpg') }}" alt="Special Burger"/>
-                  </div>
-               </div>
+      @if($offer)
+
+<section id="special">
+
+    <div class="spbg"></div>
+
+    <div class="container" style="position:relative;z-index:2;">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6" data-aos="fade-right">
+
+                <div class="sptag">
+                    <i class="fas fa-bolt me-1"></i>
+                    {{ $offer->badge }}
+                </div>
+
+                <h2 class="sptitle">
+
+                    {{ $offer->title }}
+
+                    <br>
+
+                    <span>
+                        {{ $offer->highlight_text }}
+                    </span>
+
+                </h2>
+
+                <p class="spdesc">
+                    {{ $offer->description }}
+                </p>
+
+                <div class="cdwrap">
+
+                    <div class="cditem">
+                        <span class="cdnum">
+                            {{ str_pad($offer->hours,2,'0',STR_PAD_LEFT) }}
+                        </span>
+                        <span class="cdlbl">Hours</span>
+                    </div>
+
+                    <div class="cditem">
+                        <span class="cdnum">
+                            {{ str_pad($offer->minutes,2,'0',STR_PAD_LEFT) }}
+                        </span>
+                        <span class="cdlbl">Minutes</span>
+                    </div>
+
+                    <div class="cditem">
+                        <span class="cdnum">
+                            {{ str_pad($offer->seconds,2,'0',STR_PAD_LEFT) }}
+                        </span>
+                        <span class="cdlbl">Seconds</span>
+                    </div>
+
+                </div>
+
+                <a href="{{ $offer->button_link }}"
+                   class="btn-red">
+
+                    <i class="fas fa-shopping-cart"></i>
+
+                    {{ $offer->button_text }}
+
+                </a>
+
             </div>
-         </div>
-      </section>
+
+            <div class="col-lg-6" data-aos="fade-left">
+
+                <div class="spimgw">
+
+                    <div class="spglow"></div>
+
+                    <div class="sppbdg">
+
+                        <span class="old">
+                            ${{ $offer->old_price }}
+                        </span>
+
+                        <span class="np">
+                            ${{ $offer->new_price }}
+                        </span>
+
+                    </div>
+
+                    <img src="{{ asset('uploads/offers/'.$offer->image) }}"
+                         alt="{{ $offer->title }}">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@endif
 	  
 	  
       <!-- ============================================================
          GALLERY � FIX 7 (click opens detail popup)
          ============================================================ -->
-      <section id="gallery">
-         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">Food Showcase</span>
-               <h2 class="stitle">Let's See Our <span>Fast Food</span></h2>
-               <div class="sline"></div>
+      @if($foodShowcase)
+
+<section id="gallery">
+    <div class="container">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+
+            <span class="slbl">
+                {{ $foodShowcase->subtitle }}
+            </span>
+
+            <h2 class="stitle">
+                {{ $foodShowcase->title }}
+                <span>{{ $foodShowcase->highlight_text }}</span>
+            </h2>
+
+            <div class="sline"></div>
+
+        </div>
+
+        <div class="ggrid" data-aos="fade-up">
+
+            @if($foodShowcase->image1)
+            <div class="gitem">
+                <img src="{{ asset('uploads/foodshowcase/'.$foodShowcase->image1) }}" alt="">
             </div>
-            <div class="ggrid" data-aos="fade-up">
-               <div class="gitem"
-                  data-gi="0"
-                  data-gimg="img/portfolio/work1.jpg') }}"
-                  data-gtitle="Gourmet Burgers"
-                  data-gdesc="Our award-winning smash burgers, hand-crafted with 100% premium beef, aged cheddar and house-made sauces.">
-                  <img src="{{ asset('UI/img/portfolio/work1.jpg') }}" alt="Burgers"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Gourmet Burgers</span></div>
-               </div>
-               <div class="gitem"
-                  data-gi="1"
-                  data-gimg="img/portfolio/work2.jpg') }}"
-                  data-gtitle="Wood-Fired Pizza"
-                  data-gdesc="Authentic Neapolitan-style pizzas fired at 900deg F in our wood-burning stone oven for the perfect char.">
-                  <img src="{{ asset('UI/img/portfolio/work2.jpg') }}" alt="Pizza"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Wood-Fired Pizza</span></div>
-               </div>
-               <div class="gitem"
-                  data-gi="2"
-                  data-gimg="img/portfolio/work3.jpg') }}"
-                  data-gtitle="Crispy Fried Chicken"
-                  data-gdesc="Double-brined, hand-battered chicken fried to golden perfection using our 15-spice secret blend.">
-                  <img src="{{ asset('UI/img/portfolio/work3.jpg') }}" alt="Chicken"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Crispy Fried Chicken</span></div>
-               </div>
-               <div class="gitem"
-                  data-gi="3"
-                  data-gimg="img/portfolio/work4.jpg') }}"
-                  data-gtitle="Sweet Desserts"
-                  data-gdesc="Handcrafted desserts - from molten lava cakes to artisan ice cream sundaes and seasonal pastries.">
-                  <img src="{{ asset('UI/img/portfolio/work4.jpg') }}" alt="Desserts"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Sweet Desserts</span></div>
-               </div>
-               <div class="gitem"
-                  data-gi="4"
-                  data-gimg="img/portfolio/work5.jpg') }}"
-                  data-gtitle="Fresh Wraps &amp; Rolls"
-                  data-gdesc="Loaded fresh wraps packed with grilled proteins, crunchy vegetables and our house-made sauces.">
-                  <img src="{{ asset('UI/img/portfolio/work5.jpg') }}" alt="Wraps"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Fresh Wraps &amp; Rolls</span></div>
-               </div>
+            @endif
+
+            @if($foodShowcase->image2)
+            <div class="gitem">
+                <img src="{{ asset('uploads/foodshowcase/'.$foodShowcase->image2) }}" alt="">
             </div>
-         </div>
-      </section>
+            @endif
+
+            @if($foodShowcase->image3)
+            <div class="gitem">
+                <img src="{{ asset('uploads/foodshowcase/'.$foodShowcase->image3) }}" alt="">
+            </div>
+            @endif
+
+            @if($foodShowcase->image4)
+            <div class="gitem">
+                <img src="{{ asset('uploads/foodshowcase/'.$foodShowcase->image4) }}" alt="">
+            </div>
+            @endif
+
+            @if($foodShowcase->image5)
+            <div class="gitem">
+                <img src="{{ asset('uploads/foodshowcase/'.$foodShowcase->image5) }}" alt="">
+            </div>
+            @endif
+
+        </div>
+
+    </div>
+</section>
+
+@endif
       <!-- FIX 7 � GALLERY POPUP -->
       <div id="galPop">
          <div class="gpbox">

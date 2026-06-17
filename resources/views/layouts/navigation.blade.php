@@ -40,6 +40,12 @@
                     <x-nav-link :href="route('about.index')" :active="request()->routeIs('about.index')">
                         {{ __('Manage About Section') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('offer.index')" :active="request()->routeIs('offer.index')">
+                        {{ __('Manage Offer Section') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('foods_showcase.index')" :active="request()->routeIs('foods_showcase.index')">
+                        {{ __('Manage Food Showcase') }}
+                    </x-nav-link>
                 </div>
             </div>
 
