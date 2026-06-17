@@ -297,24 +297,30 @@
          </div>
       </section>
       <!-- MARQUEE -->
-      <div class="mqsec">
-         <div class="mqtrack">
-            <div class="mqitem"><i class="fas fa-circle"></i>Crispy Fried Chicken</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Gourmet Burgers</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Artisan Pizzas</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Fresh Wraps &amp; Rolls</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Loaded Fries</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Ice Cream Shakes</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Grilled Sandwiches</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Crispy Fried Chicken</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Gourmet Burgers</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Artisan Pizzas</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Fresh Wraps &amp; Rolls</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Loaded Fries</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Ice Cream Shakes</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Grilled Sandwiches</div>
-         </div>
-      </div>
+     @if(isset($marquees) && $marquees->count())
+
+<div class="mqsec">
+    <div class="mqtrack">
+
+        @foreach($marquees as $marquee)
+            <div class="mqitem">
+                <i class="fas fa-circle"></i>
+                {{ $marquee->title }}
+            </div>
+        @endforeach
+
+        {{-- Duplicate for infinite scrolling --}}
+        @foreach($marquees as $marquee)
+            <div class="mqitem">
+                <i class="fas fa-circle"></i>
+                {{ $marquee->title }}
+            </div>
+        @endforeach
+
+    </div>
+</div>
+
+@endif
       <!-- CATEGORY -->
       <section id="category">
          <div class="container">

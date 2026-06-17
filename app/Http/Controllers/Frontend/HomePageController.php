@@ -9,6 +9,7 @@ use App\Models\Menu;
 use App\Models\Contacts;
 use App\Models\HeroSection;
 use App\Models\Category;
+use App\Models\Marquee;
 
 class HomePageController extends Controller
 {
@@ -31,13 +32,16 @@ class HomePageController extends Controller
 
     $contacts = Contacts::first();
 
+    $marquees = Marquee::where('status',1)->get();
+
     return view('frontend.index', compact(
         'hero',
         'products',
         'banner',
         'categories',
         'menus',
-        'contacts'
+        'contacts',
+        'marquees'
     ));
 }
 }
