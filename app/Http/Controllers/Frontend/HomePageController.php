@@ -11,6 +11,7 @@ use App\Models\HeroSection;
 use App\Models\Category;
 use App\Models\Marquee;
 use App\Models\AboutSection;
+use App\Models\OfferSection;
 
 class HomePageController extends Controller
 {
@@ -37,6 +38,8 @@ class HomePageController extends Controller
 
     $about = AboutSection::first();
 
+    $offer = OfferSection::where('status',1)->first();
+
     return view('frontend.index', compact(
         'hero',
         'products',
@@ -45,7 +48,8 @@ class HomePageController extends Controller
         'menus',
         'contacts',
         'marquees',
-        'about'
+        'about',
+        'offer'
     ));
 }
 }

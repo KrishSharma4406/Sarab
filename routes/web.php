@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\MarqueeController;
 use App\Models\Marquee;
 use App\Http\Controllers\Admin\AboutSectionController;
 use App\Models\AboutSection;
+use App\Http\Controllers\Admin\OfferSectionController;
+use App\Models\OfferSection;
 
 Route::get('/', function () {
 
@@ -42,6 +44,8 @@ Route::get('/', function () {
 
     $about = AboutSection::first();
 
+    $offer = OfferSection::where('status', 1)->first();
+
     return view('frontend.index', compact(
         'products',
         'banner',
@@ -49,7 +53,8 @@ Route::get('/', function () {
         'contacts',
         'categories',
         'marquees',
-        'about'
+        'about',
+        'offer'
     ));
 });
 
@@ -110,6 +115,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('marquees', MarqueeController::class);
 
     Route::resource('admin/about', AboutSectionController::class);
+
+    Route::resource('offer', OfferSectionController::class);
 
 });
 
