@@ -3,33 +3,41 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Contacts;
-use App\Models\Frontend;
-use App\Models\Menu;
-use App\Models\Banner;
 use App\Models\Products;
+use App\Models\Banner;
+use App\Models\Menu;
+use App\Models\Contacts;
+use App\Models\HeroSection;
+use App\Models\Category;
+
 class HomePageController extends Controller
 {
-    public function index(Request $request)
+    public function index()
 {
-    $user = Frontend::first();
+    $hero = HeroSection::first();
+
+    $products = Products::all();
+
+    $banner = Banner::first();
+
+    $categories = Category::withCount('products')
+                    ->where('is_active', 1)
+                    ->orderBy('name')
+                    ->get();
 
     $menus = Menu::where('status',1)
                 ->orderBy('position')
                 ->get();
-$banner = Banner::where('status',1)->first();
 
-    $products = Products::get();
-    $banner = Banner::first();
-    $menus = Menu::where('status',1)->orderBy('position')->get();
-    $contact = Contacts::first();
+    $contacts = Contacts::first();
 
     return view('frontend.index', compact(
+        'hero',
         'products',
         'banner',
+        'categories',
         'menus',
-        'contact'
+        'contacts'
     ));
 }
 }

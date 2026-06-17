@@ -500,6 +500,14 @@ section {
   display: block;
   line-height: 1;
 }
+#contact-section {
+    padding-bottom: 120px;
+}
+
+#contact-section .fcard {
+    position: relative;
+    z-index: 2;
+}
 .fcsm {
   font-size: 0.66rem;
   color: #999;
@@ -1385,6 +1393,16 @@ section {
 /* ===================== RESERVATION â€” FIX 5 ===================== */
 #reservation {
   background: var(--light);
+  padding-bottom: 120px;
+}
+#reservation .fcard{
+    height: auto;
+}
+.form-card{
+    background:#fff;
+    border-radius:24px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 .resico {
   width: 54px;

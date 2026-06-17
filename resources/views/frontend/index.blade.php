@@ -25,26 +25,83 @@
       <!-- ============================================================
          TOP BAR
          ============================================================ -->
-      <div id="topbar">
-         <div class="container">
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-               <div class="top-contact d-flex flex-wrap">
-                  <span><i class="fas fa-phone-alt"></i>{{ $contact->phone ?? '' }}</span>
-                  <span><i class="fas fa-envelope"></i>{{ $contact->email ?? '' }}</span>
-                  <span><i class="fas fa-map-marker-alt"></i>{{ $contact->address ?? '' }}</span>
-               </div>
-               <div class="d-flex align-items-center gap-3">
-                  <span class="ttag"><i class="fas fa-fire me-1"></i>Free Delivery Today!</span>
-                  <div class="tsoc">
-                     <a href="#"><i class="fab fa-facebook-f"></i></a>
-                     <a href="#"><i class="fab fa-instagram"></i></a>
-                     <a href="#"><i class="fab fa-tiktok"></i></a>
-                     <a href="#"><i class="fab fa-youtube"></i></a>
-                  </div>
-               </div>
+      @if(
+    !empty($contacts?->phone) ||
+    !empty($contacts?->email) ||
+    !empty($contacts?->address)
+)
+
+<div id="topbar">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+            <div class="top-contact d-flex flex-wrap">
+
+                @if($contacts?->phone)
+                    <span>
+                        <i class="fas fa-phone-alt"></i>
+                        {{ $contacts->phone }}
+                    </span>
+                @endif
+
+                @if($contacts?->email)
+                    <span>
+                        <i class="fas fa-envelope"></i>
+                        {{ $contacts->email }}
+                    </span>
+                @endif
+
+                @if($contacts?->address)
+                    <span>
+                        <i class="fas fa-map-marker-alt"></i>
+                        {{ $contacts->address }}
+                    </span>
+                @endif
+
             </div>
-         </div>
-      </div>
+
+            <div class="d-flex align-items-center gap-3">
+
+                <span class="ttag">
+                    <i class="fas fa-fire me-1"></i>
+                    Free Delivery Today!
+                </span>
+
+                <div class="tsoc">
+
+                    @if(!empty($contacts?->facebook))
+                        <a href="{{ $contacts->facebook }}">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    @endif
+
+                    @if(!empty($contacts?->instagram))
+                        <a href="{{ $contacts->instagram }}">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    @endif
+
+                    @if(!empty($contacts?->twitter))
+                        <a href="{{ $contacts->twitter }}">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    @endif
+
+                    @if(!empty($contacts?->youtube))
+                        <a href="{{ $contacts->youtube }}">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    @endif
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@endif
       <!-- ============================================================
          NAVBAR
          ============================================================ -->
@@ -156,10 +213,24 @@
                         <span>{{ $banner->title }}</span>
                      @endif
                   </div>
-                  <h1 class="htitle">Delicious <span class="hl">Fast Food</span><br/>for Every Moment</h1>
-                  <p class="hdesc">Experience bold flavors crafted from premium ingredients. From crispy burgers to gourmet pizzas - every bite is an adventure worth savoring.</p>
+                  <h1 class="htitle">
+                     {{ $hero->title_line_1 ?? '' }}
+
+                     <span class="hl">
+                        {{ $hero->title_highlight ?? '' }}
+                     </span>
+
+                     <br>
+
+                     {{ $hero->title_line_2 ?? '' }}
+                  </h1>
+                  <p class="hdesc">
+                     {{ $hero->description ?? '' }}
+                  </p>
                   <div class="d-flex flex-wrap gap-3 mb-2">
-                     <a href="#menu" class="btn-red"><i class="fas fa-utensils"></i>Explore Menu</a>
+                     <a href="{{ $hero->button_link ?? '' }}" class="btn-red">
+                        {{ $hero->button_text ?? '' }}
+                     </a>
                      <!-- FIX 2: Magnific popup video trigger -->
 					 <a href="https://www.youtube.com/watch?v=RXv_uIN6e-Y" class="magnific_popup btn-play popup-youtube">
 						<div class="pico"><i class="fas fa-play"></i></div>
@@ -167,13 +238,17 @@
 					 </a>
                   </div>
                   <div class="hstats d-flex gap-3 flex-wrap mt-4">
-                     <div class="hstat"><span class="snum">850<em>+</em></span><small>Happy Customers</small></div>
+                     <div class="hstat"><span class="snum">{{ $hero->stat1_number ?? '' }}</span>
+                        <small>{{ $hero->stat1_text ?? '' }}</small></div>
                      <div class="sdiv"></div>
-                     <div class="hstat"><span class="snum">120<em>+</em></span><small>Menu Items</small></div>
+                     <div class="hstat"><span class="snum">{{ $hero->stat2_number ?? '' }}</span>
+                        <small>{{ $hero->stat2_text ?? '' }}</small></div>
                      <div class="sdiv"></div>
-                     <div class="hstat"><span class="snum">15<em>+</em></span><small>Expert Chefs</small></div>
+                     <div class="hstat"><span class="snum">{{ $hero->stat3_number ?? '' }}</span>
+                        <small>{{ $hero->stat3_text ?? '' }}</small></div>
                      <div class="sdiv"></div>
-                     <div class="hstat"><span class="snum">12<em>yr</em></span><small>Experience</small></div>
+                     <div class="hstat"><span class="snum">{{ $hero->stat4_number ?? '' }}</span>
+                     <small>{{ $hero->stat4_text ?? '' }}</small></div>
                   </div>
                </div>
                <div class="col-lg-6">
@@ -181,18 +256,41 @@
                      <div class="hcircle">
                         <img src="{{ asset('uploads/banners/'.$banner->image) }}" alt="Burger"/>
                      </div>
-                     <div class="fcard fc1">
-                        <div class="fcoi r"><i class="fas fa-fire"></i></div>
-                        <div><span class="fcnum">Hot Deal</span><span class="fcsm">30% off today</span></div>
+                     @if(!empty($hero?->card1_title))
+                  <div class="fcard fc1">
+                     <div class="fcoi r">
+                        <i class="fas fa-fire"></i>
                      </div>
-                     <div class="fcard fc2">
-                        <div class="fcoi y"><i class="fas fa-star"></i></div>
-                        <div><span class="fcnum">4.9/5</span><span class="fcsm">2k+ reviews</span></div>
+                     <div>
+                        <span class="fcnum">{{ $hero->card1_title }}</span>
+                        <span class="fcsm">{{ $hero->card1_subtitle }}</span>
                      </div>
-                     <div class="fcard fc3">
-                        <div class="fcoi g"><i class="fas fa-clock"></i></div>
-                        <div><span class="fcnum">20 min</span><span class="fcsm">Fast delivery</span></div>
+                  </div>
+                  @endif
+
+                  @if(!empty($hero?->card2_title))
+                  <div class="fcard fc2">
+                     <div class="fcoi y">
+                        <i class="fas fa-star"></i>
                      </div>
+                     <div>
+                        <span class="fcnum">{{ $hero->card2_title }}</span>
+                        <span class="fcsm">{{ $hero->card2_subtitle }}</span>
+                     </div>
+                  </div>
+                  @endif
+
+                  @if(!empty($hero?->card3_title))
+                  <div class="fcard fc3">
+                     <div class="fcoi g">
+                        <i class="fas fa-clock"></i>
+                     </div>
+                     <div>
+                        <span class="fcnum">{{ $hero->card3_title }}</span>
+                        <span class="fcsm">{{ $hero->card3_subtitle }}</span>
+                     </div>
+                  </div>
+                  @endif
                   </div>
                </div>
             </div>
@@ -227,49 +325,39 @@
                <p class="sdesc mx-auto" style="max-width:480px;">From sizzling burgers to exotic world cuisines - find your favourite in our menu</p>
             </div>
             <div class="row g-3 justify-content-center">
-               <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="0">
-                  <div class="catcard active" data-filter="all">
-                     <img class="catimg" src="{{ asset('UI/img/category/1.jpg') }}" alt=""/>
-                     <div class="catnm">All Items</div>
-                     <div class="catct">99 items</div>
-                  </div>
-               </div>
-               <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="70">
-                  <div class="catcard" data-filter="burgers">
-                     <img class="catimg" src="{{ asset('UI/img/category/2.jpg') }}" alt=""/>
-                     <div class="catnm">Burgers</div>
-                     <div class="catct">24 items</div>
-                  </div>
-               </div>
-               <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="140">
-                  <div class="catcard" data-filter="pizza">
-                     <img class="catimg" src="{{ asset('UI/img/category/3.jpg') }}" alt=""/>
-                     <div class="catnm">Pizza</div>
-                     <div class="catct">18 items</div>
-                  </div>
-               </div>
-               <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="210">
-                  <div class="catcard" data-filter="chicken">
-                     <img class="catimg" src="{{ asset('UI/img/category/4.jpg') }}" alt=""/>
-                     <div class="catnm">Fried Chicken</div>
-                     <div class="catct">15 items</div>
-                  </div>
-               </div>
-               <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="280">
-                  <div class="catcard" data-filter="wraps">
-                     <img class="catimg" src="{{ asset('UI/img/category/5.jpg') }}" alt=""/>
-                     <div class="catnm">Wraps</div>
-                     <div class="catct">12 items</div>
-                  </div>
-               </div>
-               <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="350">
-                  <div class="catcard" data-filter="desserts">
-                     <img class="catimg" src="{{ asset('UI/img/category/6.jpg') }}" alt=""/>
-                     <div class="catnm">Desserts</div>
-                     <div class="catct">20 items</div>
-                  </div>
-               </div>
+
+    
+
+    {{-- Dynamic Categories --}}
+    @if(isset($categories) && $categories->count())
+    @foreach($categories as $category)
+
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2"
+             data-aos="zoom-in">
+
+            <div class="catcard"
+                 data-filter="{{ Str::slug($category->name) }}">
+
+                <img class="catimg"
+                     src="{{ asset('uploads/categories/'.$category->image) }}"
+                     alt="{{ $category->name }}">
+
+                <div class="catnm">
+                    {{ $category->name }}
+                </div>
+
+                <div class="catct">
+                    {{ $category->products_count }} Items
+                </div>
+
             </div>
+
+        </div>
+
+    @endforeach
+    @endif
+
+</div>
          </div>
       </section>
       <!-- ABOUT -->
@@ -955,6 +1043,16 @@
                <p class="sdesc mx-auto" style="max-width:480px;">Reserve your table for a memorable dining experience. We recommend booking 24 hours in advance for weekend evenings.</p>
             </div>
             <div class="row g-4 align-items-start">
+               @php
+               $showReservationCard = isset($contact) && (
+                  !empty($contact->opening_hours) ||
+                  !empty($contact->phone) ||
+                  !empty($contact->group_dining) ||
+                  !empty($contact->address)
+               );
+               @endphp
+
+               @if($showReservationCard)
                <div class="col-lg-4" data-aos="fade-right">
                   <div style="background:var(--dark);border-radius:18px;padding:36px;">
                      <h4 style="color:#fff;font-size:1.3rem;margin-bottom:8px;">Contact Info</h4>
@@ -987,8 +1085,9 @@
                      </div>
                   </div>
                </div>
-               <div class="col-lg-8" data-aos="fade-left">
-                  <div class="fcard">
+               @endif
+               <div class="{{ $showReservationCard ? 'col-lg-8' : 'col-lg-12' }}" data-aos="fade-left">
+                  <div class="form-card">
                      <div class="row g-3">
                         <div class="col-sm-6"><label class="flbl">Full Name *</label><input type="text" class="fctrl" placeholder="John Doe"/></div>
                         <div class="col-sm-6"><label class="flbl">Phone Number *</label><input type="tel" class="fctrl" placeholder="+1 (800) 000-0000"/></div>
@@ -1109,7 +1208,22 @@
       <!-- ============================================================
          FIX 6 � CONTACT FORM
          ============================================================ -->
-      <section id="contact-section">
+
+         @php
+$showContactCard = $contacts && (
+    !empty($contacts->address) ||
+    !empty($contacts->phone) ||
+    !empty($contacts->email) ||
+    !empty($contacts->opening_hours) ||
+    !empty($contacts->facebook) ||
+    !empty($contacts->instagram) ||
+    !empty($contacts->twitter) ||
+    !empty($contacts->linkedin) ||
+    !empty($contacts->youtube)
+);
+@endphp
+
+      <section id="contact-section" class="py-5">
          <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
                <span class="slbl">Get In Touch</span>
@@ -1118,45 +1232,99 @@
                <p class="sdesc mx-auto" style="max-width:480px;">Have a question, feedback, or want to plan a special event? We'd love to hear from you.</p>
             </div>
             <div class="row g-4">
-               <div class="col-lg-4" data-aos="fade-right">
-                  <div class="ctdark">
-                     <h4>Let's Talk</h4>
-                     <p class="ctsub">We typically respond within 2 hours during business hours.</p>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="ctinfo"><strong>Address</strong><span>{{ $contacts->address ?? '' }}</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-phone-alt"></i></div>
-                        <div class="ctinfo"><strong>Phone</strong><span>{{ $contacts->phone ?? '' }}</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-envelope"></i></div>
-                        <div class="ctinfo"><strong>Email</strong><span>{{ $contacts->email ?? '' }}</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-clock"></i></div>
-                        <div class="ctinfo"><strong>Working Hours</strong><span>{{ $contacts->opening_hours ?? '' }}</span></div>
-                     </div>
-                     <div class="ctsocrow">
-                        <a href="{{ $contacts->facebook ?? '#' }}">
-                           <i class="fab fa-facebook-f"></i>
-                        </a>
 
-                        <a href="{{ $contacts->instagram ?? '#' }}">
-                           <i class="fab fa-instagram"></i>
-                        </a>
+@if($showContactCard)
 
-                        <a href="{{ $contacts->twitter ?? '#' }}">
-                           <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="{{ $contacts->youtube ?? '#' }}">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-8" data-aos="fade-left">
+<div class="col-lg-4" data-aos="fade-right">
+    <div class="ctdark">
+        <h4>Let's Talk</h4>
+
+        @if($contacts->address)
+        <div class="ctitem">
+            <div class="cticon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="ctinfo">
+                <strong>Address</strong>
+                <span>{{ $contacts->address }}</span>
+            </div>
+        </div>
+        @endif
+
+        @if($contacts->phone)
+        <div class="ctitem">
+            <div class="cticon">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="ctinfo">
+                <strong>Phone</strong>
+                <span>{{ $contacts->phone }}</span>
+            </div>
+        </div>
+        @endif
+
+        @if($contacts->email)
+        <div class="ctitem">
+            <div class="cticon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="ctinfo">
+                <strong>Email</strong>
+                <span>{{ $contacts->email }}</span>
+            </div>
+        </div>
+        @endif
+
+        @if($contacts->opening_hours)
+        <div class="ctitem">
+            <div class="cticon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="ctinfo">
+                <strong>Working Hours</strong>
+                <span>{{ $contacts->opening_hours }}</span>
+            </div>
+        </div>
+        @endif
+
+        <div class="ctsocrow">
+            @if($contacts->facebook)
+                <a href="{{ $contacts->facebook }}">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            @endif
+
+            @if($contacts->instagram)
+                <a href="{{ $contacts->instagram }}">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            @endif
+
+            @if($contacts->twitter)
+                <a href="{{ $contacts->twitter }}">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            @endif
+
+            @if($contacts->youtube)
+                <a href="{{ $contacts->youtube }}">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            @endif
+        </div>
+
+    </div>
+</div>
+
+<div class="col-lg-8" data-aos="fade-left">
+
+@else
+
+<div class="col-lg-12" data-aos="fade-left">
+
+@endif
+               
+               <div class="{{ $showContactCard ? 'col-lg-8' : 'col-lg-12' }}" data-aos="fade-left">
                   <div class="fcard">
                      <div class="row g-3">
                         <div class="col-sm-6"><label class="flbl">Your Name *</label><input type="text" class="fctrl" placeholder="John Doe"/></div>

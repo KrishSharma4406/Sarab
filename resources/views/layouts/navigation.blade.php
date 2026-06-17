@@ -28,6 +28,12 @@
                     <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contact.index')">
                         {{ __('Manage Contact Information') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('hero-section.index')" :active="request()->routeIs('hero-section.index')">
+                        {{ __('Manage Hero Section') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                        {{ __('Manage Categories') }}
+                    </x-nav-link>
                 </div>
             </div>
 
