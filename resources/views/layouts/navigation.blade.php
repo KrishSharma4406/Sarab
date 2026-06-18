@@ -49,6 +49,9 @@
                     <x-nav-link :href="route('journey.index')" :active="request()->routeIs('journey.index')">
                         {{ __('Manage Journey') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('chefs.index')" :active="request()->routeIs('chefs.index')">
+                        {{ __('Manage Chefs') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -1036,69 +1036,84 @@
 	  
 	  
       <!-- CHEFS -->
-      <section id="chefs">
-         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">The Culinary Team</span>
-               <h2 class="stitle">Meet Our Expert <span>Chefs</span></h2>
-               <div class="sline"></div>
+      <!-- CHEFS -->
+<section id="chefs">
+    <div class="container">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="slbl">The Culinary Team</span>
+            <h2 class="stitle">
+                Meet Our Expert
+                <span>Chefs</span>
+            </h2>
+            <div class="sline"></div>
+        </div>
+
+        <div class="row g-4">
+
+            @foreach($chefs as $chef)
+
+            <div class="col-sm-6 col-lg-3"
+                 data-aos="fade-up">
+
+                <div class="chcard">
+
+                    <div class="chimg">
+
+                        <img src="{{ asset('uploads/chefs/'.$chef->image) }}"
+                             alt="{{ $chef->name }}">
+
+                        <div class="chsoc">
+
+                            @if($chef->instagram)
+                            <a href="{{ $chef->instagram }}">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            @endif
+
+                            @if($chef->facebook)
+                            <a href="{{ $chef->facebook }}">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            @endif
+
+                            @if($chef->twitter)
+                            <a href="{{ $chef->twitter }}">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            @endif
+
+                        </div>
+
+                    </div>
+
+                    <div class="chbody">
+
+                        <div class="chnm">
+                            {{ $chef->name }}
+                        </div>
+
+                        <div class="chrole">
+                            {{ $chef->designation }}
+                        </div>
+
+                        <div class="chexp">
+                            {{ $chef->experience }}
+                            Years Experience
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-            <div class="row g-4">
-               <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
-                  <div class="chcard">
-                     <div class="chimg">
-                        <img src="{{ asset('UI/img/chefs/1.jpg') }}" alt=""/>
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                     </div>
-                     <div class="chbody">
-                        <div class="chnm">Alice Mortal</div>
-                        <div class="chrole">Head Chef</div>
-                        <div class="chexp">12 years experience</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
-                  <div class="chcard">
-                     <div class="chimg">
-                        <img src="{{ asset('UI/img/chefs/2.jpg') }}" alt=""/>
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                     </div>
-                     <div class="chbody">
-                        <div class="chnm">Michael Corn</div>
-                        <div class="chrole">Grill Master</div>
-                        <div class="chexp">8 years experience</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
-                  <div class="chcard">
-                     <div class="chimg">
-                        <img src="{{ asset('UI/img/chefs/3.jpg') }}" alt=""/>
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                     </div>
-                     <div class="chbody">
-                        <div class="chnm">Faz Chowdel</div>
-                        <div class="chrole">Pastry Chef</div>
-                        <div class="chexp">10 years experience</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
-                  <div class="chcard">
-                     <div class="chimg">
-                        <img src="{{ asset('UI/img/chefs/4.jpg') }}" alt=""/>
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                     </div>
-                     <div class="chbody">
-                        <div class="chnm">William Latnum</div>
-                        <div class="chrole">Pizza Artisan</div>
-                        <div class="chexp">9 years experience</div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
+
+            @endforeach
+
+        </div>
+
+    </div>
+</section>
 	  
 	  
       <!-- HOURS -->
