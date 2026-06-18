@@ -1336,41 +1336,85 @@
                @endif
                <div class="{{ $showReservationCard ? 'col-lg-8' : 'col-lg-12' }}" data-aos="fade-left">
                   <div class="form-card">
-                     <div class="row g-3">
-                        <div class="col-sm-6"><label class="flbl">Full Name *</label><input type="text" class="fctrl" placeholder="John Doe"/></div>
-                        <div class="col-sm-6"><label class="flbl">Phone Number *</label><input type="tel" class="fctrl" placeholder="+1 (800) 000-0000"/></div>
-                        <div class="col-sm-6"><label class="flbl">Email Address *</label><input type="email" class="fctrl" placeholder="you@email.com"/></div>
-                        <div class="col-sm-6">
-                           <label class="flbl">Number of Guests *</label>
-                           <select class="fctrl">
-                              <option>1 Person</option>
-                              <option>2 People</option>
-                              <option>3 - 4 People</option>
-                              <option>5 - 6 People</option>
-                              <option>7 -10 People</option>
-                              <option>10+ People</option>
-                           </select>
-                        </div>
-                        <div class="col-sm-6"><label class="flbl">Date *</label><input type="date" class="fctrl"/></div>
-                        <div class="col-sm-6">
-                           <label class="flbl">Time *</label>
-                           <select class="fctrl">
-                              <option>09:00 AM</option>
-                              <option>10:00 AM</option>
-                              <option>11:00 AM</option>
-                              <option>12:00 PM</option>
-                              <option>01:00 PM</option>
-                              <option>02:00 PM</option>
-                              <option>06:00 PM</option>
-                              <option>07:00 PM</option>
-                              <option>08:00 PM</option>
-                              <option>09:00 PM</option>
-                              <option>10:00 PM</option>
-                           </select>
-                        </div>
-                        <div class="col-12"><label class="flbl">Special Requests</label><textarea class="fctrl" rows="3" placeholder="Allergies, dietary needs, special occasions..."></textarea></div>
-                        <div class="col-12"><button class="btn-red w-100 justify-content-center" id="resBtn"><i class="fas fa-calendar-check"></i>Confirm Reservation</button></div>
-                     </div>
+                     <form action="{{ route('reservation.store') }}" method="POST">
+    @csrf
+
+    <div class="row g-3">
+
+        <div class="col-sm-6">
+            <label class="flbl">Full Name *</label>
+            <input type="text"
+                   name="full_name"
+                   class="fctrl"
+                   required>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="flbl">Phone Number *</label>
+            <input type="text"
+                   name="phone"
+                   class="fctrl"
+                   required>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="flbl">Email Address *</label>
+            <input type="email"
+                   name="email"
+                   class="fctrl"
+                   required>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="flbl">Number of Guests *</label>
+
+            <select name="guests" class="fctrl">
+                <option value="1 Person">1 Person</option>
+                <option value="2 People">2 People</option>
+                <option value="3-4 People">3 - 4 People</option>
+                <option value="5-6 People">5 - 6 People</option>
+            </select>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="flbl">Date *</label>
+
+            <input type="date"
+                   name="date"
+                   class="fctrl"
+                   required>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="flbl">Time *</label>
+
+            <select name="time" class="fctrl">
+                <option>09:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+            </select>
+        </div>
+
+        <div class="col-12">
+            <label class="flbl">Special Requests</label>
+
+            <textarea name="special_request"
+                      class="fctrl"
+                      rows="3"></textarea>
+        </div>
+
+        <div class="col-12">
+            <button type="submit"
+                    class="btn-red w-100 justify-content-center">
+                <i class="fas fa-calendar-check"></i>
+                Confirm Reservation
+            </button>
+        </div>
+
+    </div>
+
+</form>
                      <div class="sucmsg" id="resOk">
                         <i class="fas fa-check-circle"></i>
                         <p>Table reserved! We'll confirm via email shortly.</p>
@@ -1574,23 +1618,83 @@ $showContactCard = $contacts && (
                
                <div class="{{ $showContactCard ? 'col-lg-8' : 'col-lg-12' }}" data-aos="fade-left">
                   <div class="fcard">
-                     <div class="row g-3">
-                        <div class="col-sm-6"><label class="flbl">Your Name *</label><input type="text" class="fctrl" placeholder="John Doe"/></div>
-                        <div class="col-sm-6"><label class="flbl">Email Address *</label><input type="email" class="fctrl" placeholder="you@email.com"/></div>
-                        <div class="col-sm-6"><label class="flbl">Phone Number</label><input type="tel" class="fctrl" placeholder="+1 (800) 000-0000"/></div>
-                        <div class="col-sm-6">
-                           <label class="flbl">Subject *</label>
-                           <select class="fctrl">
-                              <option>General Inquiry</option>
-                              <option>Catering &amp; Events</option>
-                              <option>Feedback</option>
-                              <option>Partnership</option>
-                              <option>Media &amp; Press</option>
-                           </select>
-                        </div>
-                        <div class="col-12"><label class="flbl">Message *</label><textarea class="fctrl" rows="5" placeholder="Write your message here..."></textarea></div>
-                        <div class="col-12"><button class="btn-red" id="ctcBtn"><i class="fas fa-paper-plane"></i>Send Message</button></div>
-                     </div>
+                     <form action="{{ route('contact.store') }}" method="POST">
+    @csrf
+
+    <div class="row g-3">
+
+        <div class="col-sm-6">
+            <label class="flbl">Your Name *</label>
+            <input type="text"
+                   name="name"
+                   class="fctrl"
+                   required>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="flbl">Email Address *</label>
+            <input type="email"
+                   name="email"
+                   class="fctrl"
+                   required>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="flbl">Phone Number</label>
+            <input type="text"
+                   name="phone"
+                   class="fctrl">
+        </div>
+
+        <div class="col-sm-6">
+            <label class="flbl">Subject *</label>
+
+            <select name="subject"
+                    class="fctrl">
+
+                <option value="General Inquiry">
+                    General Inquiry
+                </option>
+
+                <option value="Catering & Events">
+                    Catering & Events
+                </option>
+
+                <option value="Feedback">
+                    Feedback
+                </option>
+
+                <option value="Partnership">
+                    Partnership
+                </option>
+
+                <option value="Media & Press">
+                    Media & Press
+                </option>
+
+            </select>
+        </div>
+
+        <div class="col-12">
+            <label class="flbl">Message *</label>
+
+            <textarea name="message"
+                      class="fctrl"
+                      rows="5"
+                      required></textarea>
+        </div>
+
+        <div class="col-12">
+            <button type="submit"
+                    class="btn-red">
+                <i class="fas fa-paper-plane"></i>
+                Send Message
+            </button>
+        </div>
+
+    </div>
+
+</form>
                      <div class="sucmsg" id="ctcOk">
                         <i class="fas fa-check-circle"></i>
                         <p>Message sent! We'll reply within 2 hours.</p>
