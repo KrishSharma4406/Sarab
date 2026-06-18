@@ -2,6 +2,17 @@
 
 @section('content')
 
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+ <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            <x-slot name="header">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Manage Banners') }}
+                </h2>
+            </x-slot>
+
 <div class="container-fluid py-4">
 
     <div class="card shadow border-0">
@@ -17,7 +28,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('contact.update',$contact->id) }}"
+            <form action="{{ route('contacts.update',$contact->id) }}"
                   method="POST">
 
                 @csrf
@@ -131,6 +142,8 @@
         </div>
 
     </div>
+    </div>
+</body>
 
 </div>
 

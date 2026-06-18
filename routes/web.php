@@ -34,6 +34,8 @@ use App\Http\Controllers\FeedbackController;
 use App\Models\Feedback;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Models\Blog;
 
 Route::get('/', function () {
 
@@ -70,6 +72,8 @@ Route::get('/', function () {
 
     $feedbacks = Feedback::where('status', 1)->get();
 
+    $blogs = Blog::where('status', 1)->get();
+
     return view('frontend.index', compact(
         'products',
         'banner',
@@ -84,7 +88,8 @@ Route::get('/', function () {
         'chefs',
         'openingHours',
         'contacts',
-        'feedbacks'
+        'feedbacks',
+        'blogs'
     ));
 });
 
@@ -167,6 +172,7 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('feedbacks', FeedbackController::class); 
     Route::get('/feedbacks/approve/{id}', [FeedbackController::class, 'approve'])->name('feedbacks.approve');
+    Route::resource('blogs', BlogController::class);
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {

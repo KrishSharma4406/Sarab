@@ -64,6 +64,9 @@
                     <x-nav-link :href="route('contact-messages.index')" :active="request()->routeIs('contact-messages.index')">
                         {{ __('Manage Contact Messages') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.index')">
+                        {{ __('Manage Blogs') }}
+                    </x-nav-link>
                 </div>
             </div>
 
