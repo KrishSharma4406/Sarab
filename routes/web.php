@@ -32,6 +32,8 @@ use App\Http\Controllers\Admin\OpeningSectionController;
 use App\Models\OpeningSection;
 use App\Http\Controllers\FeedbackController;
 use App\Models\Feedback;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ContactMessageController;
 
 Route::get('/', function () {
 
@@ -108,6 +110,8 @@ Route::post('/hero-section', [HeroSectionController::class, 'store'])->name('her
 Route::get('/admin/food-showcase', [FoodShowcaseController::class, 'edit']);
 Route::post('/admin/food-showcase', [FoodShowcaseController::class, 'update'])->name('food-showcase.update');
 Route::post('/feedback-store',[FeedbackController::class,'store'])->name('feedback.store');
+Route::post('/reservation/store', [ReservationController::class, 'store'])->name('reservation.store');
+Route::post('/contact/store', [ContactMessageController::class, 'store'])->name('contact.store');
 
 
 Route::get('/dashboard', function () {
@@ -156,6 +160,10 @@ Route::prefix('admin')->group(function () {
     Route::resource('admin/chefs', ChefController::class);
 
     Route::resource('opening-hours', OpeningSectionController::class);
+
+    Route::resource('reservations', ReservationController::class);
+
+    Route::resource('contact-messages', ContactMessageController::class);
 
     Route::resource('feedbacks', FeedbackController::class); 
     Route::get('/feedbacks/approve/{id}', [FeedbackController::class, 'approve'])->name('feedbacks.approve');

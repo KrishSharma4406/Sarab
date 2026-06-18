@@ -58,6 +58,12 @@
                     <x-nav-link :href="route('feedbacks.index')" :active="request()->routeIs('feedbacks.index')">
                         {{ __('Manage Feedback') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.index')">
+                        {{ __('Manage Reservations') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact-messages.index')" :active="request()->routeIs('contact-messages.index')">
+                        {{ __('Manage Contact Messages') }}
+                    </x-nav-link>
                 </div>
             </div>
 
