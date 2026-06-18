@@ -24,6 +24,10 @@ use App\Http\Controllers\Admin\OfferSectionController;
 use App\Models\OfferSection;
 use App\Http\Controllers\Admin\FoodShowcaseController;
 use App\Models\FoodShowcase;
+use App\Http\Controllers\Admin\JourneyController;
+use App\Models\Journey;
+use App\Http\Controllers\Admin\ChefController;
+use App\Models\Chef;
 
 Route::get('/', function () {
 
@@ -50,6 +54,10 @@ Route::get('/', function () {
 
     $foodShowcase = FoodShowcase::first();
 
+    $journeys = Journey::where('status', 1)->orderBy('position')->get();
+
+    $chefs = Chef::where('status', 1)->orderBy('experience', 'desc')->get();
+
     return view('frontend.index', compact(
         'products',
         'banner',
@@ -59,7 +67,9 @@ Route::get('/', function () {
         'marquees',
         'about',
         'offer',
-        'foodShowcase'
+        'foodShowcase',
+        'journeys',
+        'chefs'
     ));
 });
 
@@ -126,6 +136,10 @@ Route::prefix('admin')->group(function () {
     Route::resource('offer', OfferSectionController::class);
 
     Route::resource('foods_showcase', FoodShowcaseController::class);
+
+    Route::resource('journey', JourneyController::class);
+
+    Route::resource('admin/chefs', ChefController::class);
 
 });
 

@@ -13,6 +13,8 @@ use App\Models\Marquee;
 use App\Models\AboutSection;
 use App\Models\OfferSection;
 use App\Models\FoodShowcase;
+use App\Models\Journey;
+use App\Models\Chef;
 
 class HomePageController extends Controller
 {
@@ -43,6 +45,10 @@ class HomePageController extends Controller
 
     $foodShowcase = FoodShowcase::first();
 
+    $journeys = Journey::where('status', 1)->orderBy('position')->get();
+
+    $chefs = Chef::where('status', 1)->orderBy('experience', 'desc')->get();
+
     return view('frontend.index', compact(
         'hero',
         'products',
@@ -53,7 +59,9 @@ class HomePageController extends Controller
         'marquees',
         'about',
         'offer',
-        'foodShowcase'
+        'foodShowcase',
+        'journeys',
+        'chefs'
     ));
 }
 }
