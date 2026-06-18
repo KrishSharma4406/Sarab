@@ -52,6 +52,12 @@
                     <x-nav-link :href="route('chefs.index')" :active="request()->routeIs('chefs.index')">
                         {{ __('Manage Chefs') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('opening-hours.index')" :active="request()->routeIs('opening-hours.index')">
+                        {{ __('Manage Opening Hours') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('feedbacks.index')" :active="request()->routeIs('feedbacks.index')">
+                        {{ __('Manage Feedback') }}
+                    </x-nav-link>
                 </div>
             </div>
 
