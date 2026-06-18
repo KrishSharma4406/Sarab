@@ -2,6 +2,17 @@
 
 @section('content')
 
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+ <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            <x-slot name="header">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Manage Banners') }}
+                </h2>
+            </x-slot>
+
 <div class="container">
 
     <h2>Edit Food Showcase</h2>
@@ -71,5 +82,6 @@
     </form>
 
 </div>
-
+</div>
+</body>
 @endsection

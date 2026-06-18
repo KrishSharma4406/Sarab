@@ -17,6 +17,7 @@ use App\Models\Journey;
 use App\Models\Chef;
 use App\Models\OpeningSection;
 use App\Models\Feedback;
+use App\Models\Blog;
 
 class HomePageController extends Controller
 {
@@ -55,6 +56,8 @@ class HomePageController extends Controller
 
     $feedbacks = Feedback::where('status', 1)->get();
 
+    $blogs = Blog::latest()->where('status',1)->take(3)->get();
+
     return view('frontend.index', compact(
         'hero',
         'products',
@@ -69,7 +72,8 @@ class HomePageController extends Controller
         'journeys',
         'chefs',
         'openingHours',
-        'feedbacks'
+        'feedbacks',
+        'blogs'
     ));
 }
 }
