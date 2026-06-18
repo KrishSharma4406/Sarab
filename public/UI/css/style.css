@@ -2453,3 +2453,65 @@ footer {
     font-size: 1.8rem;
   }
 }
+.feedback-section{
+background:#f8f8f8;
+}
+
+.feedback-card{
+background:#fff;
+padding:50px;
+border-radius:25px;
+box-shadow:0 20px 60px rgba(0,0,0,.08);
+border:1px solid #eee;
+}
+
+.fb-label{
+display:block;
+margin-bottom:10px;
+font-weight:600;
+color:#222;
+font-size:14px;
+}
+
+.fb-input{
+width:100%;
+border:2px solid #eee;
+border-radius:12px;
+padding:14px 18px;
+font-size:15px;
+transition:.3s;
+outline:none;
+}
+
+.fb-input:focus{
+border-color:#e8281a;
+box-shadow:0 0 15px rgba(232,40,26,.15);
+}
+
+textarea.fb-input{
+resize:none;
+}
+
+.fb-btn{
+border:none;
+background:#e8281a;
+color:#fff;
+padding:16px 40px;
+border-radius:50px;
+font-weight:600;
+transition:.3s;
+}
+
+.fb-btn:hover{
+background:#111;
+transform:translateY(-3px);
+}
+
+@media(max-width:768px){
+
+.feedback-card{
+    padding:25px;
+}
+
+}
+

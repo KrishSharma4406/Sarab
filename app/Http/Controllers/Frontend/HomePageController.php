@@ -15,6 +15,8 @@ use App\Models\OfferSection;
 use App\Models\FoodShowcase;
 use App\Models\Journey;
 use App\Models\Chef;
+use App\Models\OpeningSection;
+use App\Models\Feedback;
 
 class HomePageController extends Controller
 {
@@ -49,6 +51,10 @@ class HomePageController extends Controller
 
     $chefs = Chef::where('status', 1)->orderBy('experience', 'desc')->get();
 
+    $openingHours = OpeningSection::orderBy('id')->get();
+
+    $feedbacks = Feedback::where('status', 1)->get();
+
     return view('frontend.index', compact(
         'hero',
         'products',
@@ -61,7 +67,9 @@ class HomePageController extends Controller
         'offer',
         'foodShowcase',
         'journeys',
-        'chefs'
+        'chefs',
+        'openingHours',
+        'feedbacks'
     ));
 }
 }

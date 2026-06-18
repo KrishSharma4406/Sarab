@@ -28,6 +28,10 @@ use App\Http\Controllers\Admin\JourneyController;
 use App\Models\Journey;
 use App\Http\Controllers\Admin\ChefController;
 use App\Models\Chef;
+use App\Http\Controllers\Admin\OpeningSectionController;
+use App\Models\OpeningSection;
+use App\Http\Controllers\FeedbackController;
+use App\Models\Feedback;
 
 Route::get('/', function () {
 
@@ -58,6 +62,12 @@ Route::get('/', function () {
 
     $chefs = Chef::where('status', 1)->orderBy('experience', 'desc')->get();
 
+    $openingHours = OpeningSection::orderBy('id')->get();
+
+    $contacts = Contacts::first();
+
+    $feedbacks = Feedback::where('status', 1)->get();
+
     return view('frontend.index', compact(
         'products',
         'banner',
@@ -69,7 +79,10 @@ Route::get('/', function () {
         'offer',
         'foodShowcase',
         'journeys',
-        'chefs'
+        'chefs',
+        'openingHours',
+        'contacts',
+        'feedbacks'
     ));
 });
 
@@ -94,6 +107,7 @@ Route::get('/hero-section/edit', [HeroSectionController::class, 'edit'])->name('
 Route::post('/hero-section', [HeroSectionController::class, 'store'])->name('hero-section.store');
 Route::get('/admin/food-showcase', [FoodShowcaseController::class, 'edit']);
 Route::post('/admin/food-showcase', [FoodShowcaseController::class, 'update'])->name('food-showcase.update');
+Route::post('/feedback-store',[FeedbackController::class,'store'])->name('feedback.store');
 
 
 Route::get('/dashboard', function () {
@@ -141,6 +155,10 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('admin/chefs', ChefController::class);
 
+    Route::resource('opening-hours', OpeningSectionController::class);
+
+    Route::resource('feedbacks', FeedbackController::class); 
+    Route::get('/feedbacks/approve/{id}', [FeedbackController::class, 'approve'])->name('feedbacks.approve');
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {

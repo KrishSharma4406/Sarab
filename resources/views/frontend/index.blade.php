@@ -1127,44 +1127,55 @@
             </div>
             <div class="row g-4 align-items-start">
                <div class="col-lg-5" data-aos="fade-right">
-                  <div class="hrscard">
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Monday - Tuesday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot off"></div>
-                           <span class="hrstime" style="color:#ff6b6b;">Closed</span>
-                        </div>
-                     </div>
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Wednesday - Thursday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot on"></div>
-                           <span class="hrstime">09:00 AM - 10:00 PM</span>
-                        </div>
-                     </div>
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Friday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot on"></div>
-                           <span class="hrstime">09:00 AM - 11:00 PM</span>
-                        </div>
-                     </div>
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Saturday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot on"></div>
-                           <span class="hrstime">10:00 AM - 11:30 PM</span>
-                        </div>
-                     </div>
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Sunday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot on"></div>
-                           <span class="hrstime">11:00 AM - 09:00 PM</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+
+    <div class="hrscard">
+
+        @foreach($openingHours as $hour)
+
+        <div class="hrsrow">
+
+            <span class="hrsday">
+                <i class="fas fa-calendar-day me-2"
+                   style="color:var(--secondary);"></i>
+
+                {{ $hour->day_name }}
+            </span>
+
+            <div class="d-flex align-items-center gap-2">
+
+                @if($hour->is_closed)
+
+                    <div class="hdot off"></div>
+
+                    <span class="hrstime text-danger">
+                        Closed
+                    </span>
+
+                @else
+
+                    <div class="hdot on"></div>
+
+                    <span class="hrstime">
+
+                        {{ date('h:i A', strtotime($hour->opening_time)) }}
+
+                        -
+
+                        {{ date('h:i A', strtotime($hour->closing_time)) }}
+
+                    </span>
+
+                @endif
+
+            </div>
+
+        </div>
+
+        @endforeach
+
+    </div>
+
+</div>
                <div class="col-lg-3" data-aos="zoom-in">
                   <div class="hrscta">
                      <i class="fas fa-truck-fast fa-2x mb-3" style="color:rgba(255,255,255,.8);"></i>
@@ -1177,13 +1188,13 @@
                   <div class="hrscard">
                      <h5 style="color:#fff;margin-bottom:18px;font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:700;"><i class="fas fa-map-marker-alt me-2" style="color:var(--secondary);"></i>Find Us</h5>
                      <div class="hrsrow"><span class="hrsday"><i class="fas fa-location-dot me-2" style="color:var(--secondary);"></i>Address</span><span class="hrstime" style="font-size:.8rem;">
-                        {{ $contact->address ?? '' }}
+                        {{ $contacts->address ?? '' }}
                      </span></div>
                      <div class="hrsrow"><span class="hrsday"><i class="fas fa-phone me-2" style="color:var(--secondary);"></i>Phone</span><span class="hrstime" style="font-size:.8rem;">
-                        {{ $contact->phone ?? '' }}
+                        {{ $contacts->phone ?? '' }}
                      </span></div>
                      <div class="hrsrow"><span class="hrsday"><i class="fas fa-envelope me-2" style="color:var(--secondary);"></i>Email</span><span class="hrstime" style="font-size:.8rem;">
-                        {{ $contact->email ?? '' }}
+                        {{ $contacts->email ?? '' }}
                      </span></div>
                   </div>
                </div>
@@ -1202,68 +1213,74 @@
             </div>
             <div class="swiper tesSwiper" data-aos="fade-up">
                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                     <div class="tescard">
-                        <div class="tesq">"</div>
-                        <div class="tess"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testxt">Honestly the best burgers I've ever had. The smash burger is incredible - perfectly crispy edges, juicy inside, and those pickles! We come every Friday now.</p>
-                        <div class="tesauth">
-                           <img src="{{ asset('UI/img/testimonial/1.jpg') }}" alt=""/>
-                           <div>
-                              <div class="tesnm">Monica Wilber</div>
-                              <div class="tesrl">Regular Customer</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="tescard">
-                        <div class="tesq">"</div>
-                        <div class="tess"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testxt">Ordered delivery and the food arrived hot and fresh in 22 minutes. Portions are generous. Sarab has become my go-to comfort food spot without question.</p>
-                        <div class="tesauth">
-                           <img src="{{ asset('UI/img/testimonial/2.jpg') }}" alt=""/>
-                           <div>
-                              <div class="tesnm">Cameron Fox</div>
-                              <div class="tesrl">Food Blogger</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="tescard">
-                        <div class="tesq">"</div>
-                        <div class="tess"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testxt">The truffle pasta blew my mind. I didn't expect that quality from a fast food place. Great ambiance, super friendly staff. Highly recommended!</p>
-                        <div class="tesauth">
-                           <img src="{{ asset('UI/img/testimonial/3.jpg') }}" alt=""/>
-                           <div>
-                              <div class="tesnm">Priya Sharma</div>
-                              <div class="tesrl">Food Enthusiast</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="tescard">
-                        <div class="tesq">"</div>
-                        <div class="tess"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testxt">Catered our office party of 50 people and everything was flawless. Fresh, delicious, on time and well presented. Nashville chicken was the absolute star!</p>
-                        <div class="tesauth">
-                           <img src="{{ asset('UI/img/testimonial/4.jpg') }}" alt=""/>
-                           <div>
-                              <div class="tesnm">David Park</div>
-                              <div class="tesrl">Corporate Client</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+
+@foreach($feedbacks as $feedback)
+
+<div class="swiper-slide">
+
+    <div class="tescard">
+
+        <div class="tesq">"</div>
+
+        <div class="tess">
+
+            @for($i=1; $i<=5; $i++)
+
+                @if($i <= $feedback->rating)
+                    &#9733;
+                @else
+                    &#9734;
+                @endif
+
+            @endfor
+
+        </div>
+
+        <p class="testxt">
+            {{ $feedback->message }}
+        </p>
+
+        <div class="tesauth">
+
+            @if($feedback->image)
+
+                <img src="{{ asset($feedback->image) }}"
+                     alt="{{ $feedback->name }}">
+
+            @else
+
+                <img src="{{ asset('UI/img/testimonial/1.jpg') }}"
+                     alt="User">
+
+            @endif
+
+            <div>
+
+                <div class="tesnm">
+                    {{ $feedback->name }}
+                </div>
+
+                <div class="tesrl">
+                    {{ $feedback->designation }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@endforeach
+
+</div>
                <div class="swiper-pagination mt-4" style="position:static;"></div>
             </div>
          </div>
       </section>
 	  
+       @include('frontend.feedback-form')
       <!-- RESERVATION FORM -->
       <section id="reservation">
          <div class="container">
