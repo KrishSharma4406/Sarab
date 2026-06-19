@@ -112,6 +112,41 @@
                 </div>
 
                 <div class="mb-3">
+
+    <label class="form-label fw-semibold">
+        Product Category
+    </label>
+
+    <select name="category_id"
+            class="form-select @error('category_id') is-invalid @enderror">
+
+        <option value="">
+            Select Category
+        </option>
+
+        @foreach($categories as $category)
+
+            <option value="{{ $category->id }}"
+                {{ old('category_id') == $category->id ? 'selected' : '' }}>
+
+                {{ $category->name }}
+
+            </option>
+
+        @endforeach
+
+    </select>
+
+    @error('category_id')
+        <p class="invalid-feedback">
+            {{ $message }}
+        </p>
+    @enderror
+
+</div>
+
+
+                <div class="mb-3">
                     <label class="form-label fw-semibold">
                         Product Image
                     </label>

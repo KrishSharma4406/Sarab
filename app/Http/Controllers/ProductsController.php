@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Category;
 
 class ProductsController extends Controller
 {
@@ -24,9 +25,11 @@ class ProductsController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('products.create');
-    }
+{
+    $categories = Category::all();
+
+    return view('products.create', compact('categories'));
+}
 
     /**
      * Store a newly created resource in storage.
@@ -53,6 +56,7 @@ class ProductsController extends Controller
     $product->sku = $request->input('sku');
     $product->price = $request->input('price');
     $product->status = $request->input('status');
+    $product->category_id = $request->input('category_id');
     $product->save();
 
     if($request->hasFile('image')) {
@@ -63,7 +67,10 @@ class ProductsController extends Controller
         $product->save();
     }
 
-    return redirect()->route('products.main')->with('success', 'Product created successfully');
+    return redirect()->back()->with(
+        'success',
+        'Thank you! Your review has been submitted successfully.'
+    );
     }
 
 
@@ -81,8 +88,9 @@ class ProductsController extends Controller
         public function edit($id)
     {
     $product = Products::findOrFail($id);
+    $categories = Category::all();
 
-    return view('products.edit', compact('product'));
+    return view('products.edit', compact('product', 'categories'));
 
     }
     
@@ -98,6 +106,7 @@ class ProductsController extends Controller
         'sku' => $request->sku,
         'price' => $request->price,
         'status' => $request->status,
+        'category_id' => $request->category_id,
     ]);
 
     return redirect()
