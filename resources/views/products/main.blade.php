@@ -79,6 +79,7 @@
                         <th>ID</th>
                         <th>Image</th>
                         <th>Name</th>
+                        <th>Category</th>
                         <th>SKU</th>
                         <th>Price</th>
                         <th>Status</th>
@@ -103,6 +104,8 @@
                         </td>
 
                         <td>{{ $product->name }}</td>
+
+                        <td>{{ $product->category?->name }}</td>
 
                         <td>{{ $product->sku }}</td>
 
