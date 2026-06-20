@@ -14,7 +14,7 @@ class BannerController extends Controller
 {
     $banners = Banner::latest()->get();
 
-    return view('banner.create', compact('banners'));
+    return view('banner.index', compact('banners'));
 }
 
     /**
@@ -22,7 +22,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        //
+        return view('banner.create');
     }
 
     /**
@@ -67,16 +67,43 @@ public function store(Request $request)
      */
     public function edit(Banner $banner)
     {
-        //
+        return view('banner.edit', compact('banner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Banner $banner)
-    {
-        //
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'status' => 'required'
+    ]);
+
+    $banner = Banner::findOrFail($id);
+
+    $banner->title = $request->title;
+    $banner->status = $request->status;
+
+    if ($request->hasFile('image')) {
+
+        $image = time().'.'.$request->image->extension();
+
+        $request->image->move(
+            public_path('uploads/banners'),
+            $image
+        );
+
+        $banner->image = $image;
     }
+
+    $banner->save();
+
+    return redirect()
+            ->route('banner.index')
+            ->with('success','Banner Updated Successfully');
+}
 
     /**
      * Remove the specified resource from storage.
